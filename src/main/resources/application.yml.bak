@@ -1,0 +1,91 @@
+spring:
+  profiles:
+    active: dev
+
+#开发环境配置
+spring:
+  profiles: dev
+
+server:
+    port: 9090
+    context-path: #/
+
+logging:
+    level:
+        tk.mybatis: TRACE
+
+druid:
+    url: jdbc:mysql://192.168.16.137:3306/test
+    username: root
+    password:
+    initial-size: 1
+    min-idle: 1
+    max-active: 20
+    test-on-borrow: true
+
+spring:
+    mvc:
+        view:
+            prefix: /templates/
+            suffix: .ftl
+    freemarker:
+        cache: false
+        request-context-attribute: request
+    redis:
+        # REDIS (RedisProperties)
+        # Redis数据库索引（默认为0）
+        database: 0
+        # Redis服务器地址
+        host: 127.0.0.1
+        # Redis服务器连接端口
+        port: 6379
+        # Redis服务器连接密码（默认为空）
+        password: rtfsad#$!
+        # 连接池最大连接数（使用负值表示没有限制）
+        pool:
+          max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        pool:
+          max-wait: -1
+        # 连接池中的最大空闲连接
+        pool:
+          max-idle: 8
+        # 连接池中的最小空闲连接
+        pool:
+          min-idle: 0
+        # 连接超时时间（毫秒）
+        timeout: 0
+        
+
+
+mybatis:
+    type-aliases-package: com.bdzt.springboot.example.model
+    mapper-locations: classpath:mapper/*.xml
+
+mapper:
+    mappers:
+        - com.bdzt.springboot.example.util.MyMapper
+    not-empty: false
+    identity: MYSQL
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+
+#测试环境配置
+spring:
+  profiles: test
+
+server:
+  port: 9091
+
+
+#生产环境配置
+spring:
+  profiles: pro
+
+server:
+  port: 9092
